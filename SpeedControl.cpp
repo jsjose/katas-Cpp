@@ -8,7 +8,7 @@ public:
 
 
     	// for (std::vector<>::iterator i = .begin(); i != .end(); ++i)
-    	for (i = 1; i < x.length(); ++i)
+    	for (i = 1; i < x.size(); ++i)
     	{
     		speed = (x[i]-x[i-1])*3600/s;
     		if (speed >= maxSpeed)
