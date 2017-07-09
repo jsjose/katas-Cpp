@@ -10,19 +10,32 @@ class Dioph
   static std::vector<std::pair <long, long>> solEquaStr(long long n)
   {
     std::vector<std::pair <long, long>> rc;
-    long long i, j, res;
+    long long y, x, u, v, t, res, resto;
+    bool sol = false;
         
-    for (j = 0; j < n; j++)
+    if (n > 100) {t = n/2;} else {t = n;}   
+    for (u = t; u > 0; u--)
     {
-      for (i = 0; i <= j/2; i++)
+      resto = n%u;
+      if (resto == 0)
       {
-        res = (j-2*i)*(j+2*i);
-        if (res == n)
+        v = n/u;
+        x = (u+v)/2;
+        y = (v-u)/4;
+        // cout << "n = " << n << " u = " << u << " v = " << v << " x = " << x << "  y = " << y << endl;
+        if (x > 0 && y > 0)
         {
-          rc.push_back ({j,i});
+          sol = true;
+          rc.push_back ({x, y});
+          cout << "n = " << n << " u = " << u << " v = " << v << " x = " << x << "  y = " << y << endl;
         }
-      } 
-    }  
+      }  
+    } 
+    
+    if (not sol)
+    {
+      cout << " not sol" << endl;
+    }
     return rc;
   };
 };
