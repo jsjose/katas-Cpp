@@ -1,17 +1,58 @@
 // https://www.codewars.com/kata/5536a85b6ed4ee5a78000035/train/cpp
 
+#include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <math.h>
+using namespace std;
 
-typedef std::unordered_map<std::string, double> stringdblmap;
+typedef unordered_map<string, double> stringdblmap;
 class Tour
 {
 public:
-    static int tour(std::vector<std::string> &arrFriends, std::vector<std::vector<std::string>> &ftwns, stringdblmap &h)
+    static int tour(vector<string> &arrFriends, vector<vector<string>> &ftwns, stringdblmap &h)
     {
-        return 0;
+        double dist = 0;
+        int i, j, friends, lastFriend = 0;
+
+        friends = min(arrFriends.size(),ftwns.size());
+        dist = h[ftwns[0][1]];    
+
+        cout << " ******  " <<  friends << endl;
+        cout << "j = " << 0 << " i = " << 0 << " " << arrFriends[0] << "  " << ftwns[0][1]  << " " << ftwns[0][0] << " " << h[ftwns[0][1]] << endl;
+
+        for (i = 1, j = 1; j <= friends-1; ++i)
+        {
+            //cout << "j = " << j << " i = " << i << endl;
+            cout << "j = " << j << " i = " << i << " " << arrFriends[j] << " " << ftwns[i][1]  << " " << ftwns[i][0] << " " << h[ftwns[i][1]] << endl;
+ 
+            if (arrFriends[j] == ftwns[i][0])
+            {
+                dist = dist + sqrt(pow(h[ftwns[i][1]],2)-pow(h[ftwns[lastFriend][1]],2));
+
+                cout << "j = " << j << " i = " << i << " " << arrFriends[j] << " " << ftwns[i][1]  << " " << ftwns[i][0] << " " << h[ftwns[i][1]] << endl;
+                if (j == friends-1)
+                {
+                    cout << "cierre " << endl;
+                    dist = dist + h[ftwns[i][1]];
+                }
+                lastFriend = i;
+                j++;
+            }
+            else if (j == friends-1)
+            {
+                cout << "cierre " << endl;
+                dist = dist + h[ftwns[i][1]];
+            }
+ //               cout << "j = " << j << "  " << arrFriends[i] << " " << ftwns[j][1]  << " " << ftwns[j][0] << " " << h[ftwns[j][1]] << endl;
+
+        }
+
+        cout << " dist " << dist << endl;
+        return int(dist);
     };
 };
+
 
 //******************
 #include <string>
